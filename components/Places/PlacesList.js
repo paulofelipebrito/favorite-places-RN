@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { Colors } from '../../constans/colors';
+import { Colors } from '../../constants/colors';
 
 import PlaceItem from './PlaceItem';
 

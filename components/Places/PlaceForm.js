@@ -11,6 +11,7 @@ function PlaceForm({onCreatePlace}) {
   const [enteredTitle, setEnteredTitle] = useState('');
   const [selectedImage, setSelectedImage] = useState();
   const [pickedLocation, setPickedLocation] = useState();
+  const [isAvailable, setIsAvailable] = useState(false);
 
   function changeTitleHandler(enteredText) {
     setEnteredTitle(enteredText);
@@ -21,12 +22,28 @@ function PlaceForm({onCreatePlace}) {
   }
 
   const pickLocationHandler = useCallback((location) => {
+    console.log(location)
     setPickedLocation(location);
   }, []);
 
   function savePlaceHandler() {
-    const placeData = new Place(enteredTitle, selectedImage, pickedLocation);
-    onCreatePlace(placeData);
+    setTimeout(() => {
+      if(enteredTitle, selectedImage, pickedLocation){
+        setIsAvailable(true)
+        const placeData = new Place(enteredTitle, selectedImage, pickedLocation);
+        onCreatePlace(placeData);
+      } else {
+        setIsAvailable(false)
+      }      
+    }, 5000);
+    if(isAvailable){
+      const placeData = new Place(enteredTitle, selectedImage, pickedLocation);
+      onCreatePlace(placeData);
+    // } else {
+    //   Alert.alert(
+    //     `Please select all the information before save`
+    //   );
+    }
   }
 
   return (
